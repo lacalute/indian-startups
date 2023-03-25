@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a href="/">Back</a>
+  <div class="container" style="text-align: center;">
+    <div class="title" style="text-align: center;">
+      <h1 style="font-size: 50px;">{{data['name']}}</h1>
+    </div>
+    <div class="data" style="display: flex; justify-content: space-around; margin-bottom: 40px;">
+      <div>
+        <h3 style="font-weight: bold; font-size: 40px; margin: 0px; padding: 0px;">{{data['city']}}</h3>
+        <p style="font-weight: 400; color: gray; font-size: 20px; margin: 0px; padding: 0px;">City</p>
+      </div>
+      <div>
+        <h3 style="font-weight: bold; font-size: 40px; margin: 0px; padding: 0px;">{{data['year']}}</h3>
+        <p style="font-weight: 400; color: gray; font-size: 20px; margin: 0px; padding: 0px;">Year</p>
+      </div>
+      
+           
+    </div>  
+    <div class="data" style="display: flex; justify-content: space-around; margin-bottom: 40px;">
+      <div>
+        <h3 style="font-weight: bold; font-size: 40px; margin: 0px; padding: 0px;">{{data['emp']}}</h3>
+        <p style="font-weight: 400; color: gray; font-size: 20px; margin: 0px; padding: 0px;">Employees</p>
+      </div>
+      <div>
+        <h3 style="font-weight: bold; font-size: 40px; margin: 0px; padding: 0px;">{{data['amount']}}</h3>
+        <p style="font-weight: 400; color: gray; font-size: 20px; margin: 0px; padding: 0px;">Funding amount USD</p>
+      </div>
+      
+           
+    </div>  
+    <div class="data" style="display: flex; justify-content: space-around; align-items: center;">
+      <div>
+        <h3 style="font-weight: bold; font-size: 40px; margin: 0px; padding: 0px;">{{data['rounds']}}</h3>
+        <p style="font-weight: 400; color: gray; font-size: 20px; margin: 0px; padding: 0px;">Funding rounds</p>
+      </div>      
+      
+      <div class="founders">
+        <p style="font-weight: bold;">{{data['founders']}}</p>
+        <h3 style="font-weight: 400; color: gray; font-size: 20px; margin: 0px; padding: 0px;">Founders</h3>
+      </div>
+      
+      <div class="industries" style="width: 200px;">
+        <p style="font-weight: bold;">{{data['industry']}}</p>
+        <h3 style="font-weight: 400; color: gray; font-size: 20px; margin: 0px; padding: 0px;">Industries</h3>
+      </div>
+      
+    </div>  
+
+  </div>
+</body>
+</html>

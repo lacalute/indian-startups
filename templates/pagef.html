@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  </head>
+
+  <body>
+     <h1 style="text-align: center;font-weight: bold; padding-top:30px; padding-bottom: 10px;">Enter the name of company from table</h1>
+    <form method="POST" action = "/dashboard">
+      <div class = "form-group" style="display: flex; justify-content: center; margin-bottom: 50px;">
+        <input style="width:400px; height: 40px;border-radius: 10px; text-align: center; font-size: 20px;border-color: black; color: black;" placeholder="Enter the company" type="text" name = "pay">
+        <input style="background-color: black; border: none; color: #fff; height: 40px;width: 150px; font-size: 15px; margin-left: -10px; cursor: pointer; border-color: black;", type="submit" value="Enter">
+      </div>
+      <div class="table_div" style="display: flex; justify-content: center;">
+          <table class="table" style="width: 600px;">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Company name</th>
+                <th scope="col">City of company</th>
+                <th scope="col">Industry</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in zip(id_t, companies_t, city_t, indust_t) %}
+              <tr>
+                <td scope="row">{{i[0]}}</td>
+                <td scope="row">{{i[1]}}</td>
+                <td scope="row">{{i[2]}}</td>
+                <td scope="row">{{i[3]}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    </form>
+  </body>
+</html>

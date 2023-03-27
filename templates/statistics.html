@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistics</title>
+</head>
+<body style="padding: 0; margin: 0;">
+  <a href="/">Back</a>
+  <h1 style="text-align: center;">Choose parameters for statistic</h1>
+  <div class="container" style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <form method="POST" action="/statistics">
+      <label for="comp-detect" style="font-size: 16px; font-weight: bold;">Choose the parameter</label>
+      <br>
+      <select name="type-detect" style="width: 400px; height: 40px; border: 2px solid #000; background-color: #fff; font-size: 15px; margin-bottom: 20px;">
+        <option value="By year">By year</option>
+        <option value="By Investing Amount">By investing amount</option>
+        <option value="By employees">By employees</option>
+        <option value="By Founding Rounds">By founding rounds</option>
+        <option value="By Industries">by industries</option>
+      </select>  
+      <br>
+      <input style="background-color: black; border: none; color: #fff; height: 40px;width: 150px; font-size: 15px; cursor: pointer; border-color: black; padding: 0;", type="submit" value="Choose">
+    </form>
+  </div>
+  
+  <!-- <div class="button" style="display: flex; justify-content: center;">
+    <input style="background-color: black; border: none; color: #fff; height: 40px;width: 150px; font-size: 15px; margin-left: -10px; cursor: pointer; border-color: black;", type="submit" value="Choose">
+  </div> -->
+  {% if type_name != None %}
+  <h1 style="text-align: center;  margin: 0;">{{type_name}}</h1>
+  <div class="stat" style="margin-top: 40px; display: flex; justify-content: center; text-align: center;">
+    {{img}}
+    <img src="/static/foo.png" alt="">
+  </div>
+  {% endif %}
+</body>
+
+</html>

@@ -1,5 +1,7 @@
 import csv
 from flask import Flask, render_template, request
+from scrapping import *
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -9,8 +11,7 @@ with open('startup.csv') as f:
   titles = x[0]
   x.pop(0)
 
-
-class Analysis:
+class Collect:
   def collect(self, index):
     l = []
     for i in x:
@@ -37,17 +38,49 @@ class Analysis:
         data['amount'] = i[8]
         data['rounds'] = i[9]
     return data    
+  
+class Statistics:
+  def years(self):
+    years_list = []
+    years_data = []
+    for i in x:
+      if i[3] not in years_list:
+        years_list.append(i[3])
+        years_data.append(dict({'year': i[3], 'number': 0}))
+      else:
+        ind = years_list.index(i[3])
+        years_data[ind]['number'] += 1
 
-analysis = Analysis()
+    years_data_sorted = sorted(years_data, key=lambda s: s['number'])
+    number = []
+    years = []
+    for w in years_data_sorted[-5:]:
+      number.append(w['number'])
+      years.append(w['year'])
+    
+    return number, years      
+
+
+collect = Collect()
 # data for main page
-id = analysis.collect(0)
-companies = analysis.collect(1)
-city = analysis.collect(2)
-indust = analysis.collect(5)
-companies_name = analysis.companies_name()
+id = collect.collect(0)
+companies = collect.collect(1)
+city = collect.collect(2)
+indust = collect.collect(5)
+companies_name = collect.companies_name()
 # data for dashboard
 
-
+def years_data():
+  stat = Statistics()
+  info = stat.years()
+  plt.style.use('ggplot')
+  fig, ax = plt.subplots()
+  plt.suptitle('By year')
+  plt.title('In what years were companies open')
+  ax.bar(info[1], info[0])
+  fig.savefig("./static/foo.png")
+  plt.close(fig)
+  return ""
 
 @app.route("/", methods=['GET'])
 def main():
@@ -55,16 +88,26 @@ def main():
 
 
 def get():
-  global pay
-  pay = request.form['pay']
-  return pay
+  pay = request.form.get('company')
+  pay2 = request.form.get('comp-detect')
+  pay3 = request.form.get('type-detect')
+  return pay, pay2, pay3
 
 
 @app.route("/dashboard", methods=['POST'])
 def show():
-  result_company = analysis.indentify(get())
-  if get() in companies_name:
+  g = get()
+  result_company = collect.indentify(g[0])
+  if g[0] in companies_name:
     return render_template('dash.html', data=result_company)
   else:
     return "The company not in list"
 
+@app.route('/about')
+def about():
+  return render_template('about.html')
+
+@app.route('/statistics', methods=['POST', 'GET'])
+def stats():
+  g = get()
+  return render_template('statistics.html', names=companies_name,  comp_name=g[1], type_name=g[2], img=years_data())

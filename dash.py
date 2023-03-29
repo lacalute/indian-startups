@@ -40,15 +40,15 @@ class Collect:
     return data    
   
 class Statistics:
-  def years(self):
+  def t1(self, index):
     years_list = []
     years_data = []
     for i in x:
-      if i[3] not in years_list:
-        years_list.append(i[3])
-        years_data.append(dict({'year': i[3], 'number': 0}))
+      if i[index] not in years_list:
+        years_list.append(i[index])
+        years_data.append(dict({'year': i[index], 'number': 1}))
       else:
-        ind = years_list.index(i[3])
+        ind = years_list.index(i[index])
         years_data[ind]['number'] += 1
 
     years_data_sorted = sorted(years_data, key=lambda s: s['number'])
@@ -58,8 +58,19 @@ class Statistics:
       number.append(w['number'])
       years.append(w['year'])
     
-    return number, years      
+    return number, years  
+  def t2(self, index):
+    amount_data = []
+    for i in x:
+      amount_data.append(dict({'company': i[1], 'amount': float(i[index])}))
+    amound_data_sorted = sorted(amount_data, key=lambda s: s['amount'])
 
+    companies = []
+    amount = []
+    for w in amound_data_sorted[-5:]:
+      companies.append(w['company'])
+      amount.append(w['amount'])
+    return companies, amount
 
 collect = Collect()
 # data for main page
@@ -70,17 +81,27 @@ indust = collect.collect(5)
 companies_name = collect.companies_name()
 # data for dashboard
 
-def years_data():
-  stat = Statistics()
-  info = stat.years()
+
+stat = Statistics()
+years = stat.t1(3)
+investing_amount = stat.t2(8)
+#employees = stat.t2(7)
+found_rounds = stat.t2(9)
+industries = stat.t1(5)
+
+for i in industries:
+  print(i)
+
+def plot_graph():
   plt.style.use('ggplot')
   fig, ax = plt.subplots()
-  plt.suptitle('By year')
-  plt.title('In what years were companies open')
-  ax.bar(info[1], info[0])
-  fig.savefig("./static/foo.png")
+  ax.bar(found_rounds[0], found_rounds[1])
+  fig.savefig("./static/found_rounds.png")
   plt.close(fig)
-  return ""
+
+plot_graph()
+
+
 
 @app.route("/", methods=['GET'])
 def main():
@@ -110,4 +131,5 @@ def about():
 @app.route('/statistics', methods=['POST', 'GET'])
 def stats():
   g = get()
-  return render_template('statistics.html', names=companies_name,  comp_name=g[1], type_name=g[2], img=years_data())
+  return render_template('statistics.html', names=companies_name,  comp_name=g[1], type_name=g[2])
+  

@@ -31,8 +31,13 @@
   {% if type_name != None %}
   <h1 style="text-align: center;  margin: 0;">{{type_name}}</h1>
   <div class="stat" style="margin-top: 40px; display: flex; justify-content: center; text-align: center;">
-    {{img}}
-    <img src="/static/foo.png" alt="">
+    {% if type_name == "By year" %}
+    <img src="/static/years.png" alt="">
+    {% elif type_name == "By Investing Amount" %}
+    <img src="/static/investing_amount.png" alt="">
+    {% elif type_name == "By Founding Rounds" %}
+    <img src="/static/found_rounds.png" alt="">
+    {% endif  %}
   </div>
   {% endif %}
 </body>

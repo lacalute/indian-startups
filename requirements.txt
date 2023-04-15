@@ -1,5 +1,4 @@
-csv
-flask
+Flask
 matplotlib
 requests
 bs4

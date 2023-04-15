@@ -1,0 +1,6 @@
+csv
+flask
+matplotlib
+requests
+bs4
+user_agents

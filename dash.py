@@ -118,8 +118,10 @@ def get():
 @app.route("/dashboard", methods=['POST'])
 def show():
   g = get()
-  result_company = collect.indentify(g[0])
-  if g[0] in companies_name:
+  str = g[0]
+  result_company = collect.indentify(str.replace(str[0], str[0].upper()))
+  new_li = [x.lower() for x in companies_name]
+  if g[0].lower() in new_li:
     return render_template('dash.html', data=result_company)
   else:
     return "The company not in list"
